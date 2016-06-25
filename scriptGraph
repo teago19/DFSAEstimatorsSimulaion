@@ -1,0 +1,47 @@
+set xlabel "Etiquetas"
+set terminal wxt size 800,800
+set grid
+
+#Total de Slots
+set terminal wxt 1
+set ylabel "Slots"
+set title "Total de Slots"
+set yrange [0:4000]
+plot "EomLee.txt" using 1:2 title "EomLee" smooth unique with linespoints, "LowerBound.txt" using 1:2 title "LowerBound" smooth unique with linespoints, "P3.txt" using 1:2 title "P3" smooth unique with linespoints, "P2.txt" using 1:2 title "P2" smooth unique with linespoints, "P1.txt" using 1:2 title "P1" smooth unique with linespoints
+
+#SlotsVazios
+set terminal wxt 2
+set ylabel "Slots"
+set title "Total de Slots Vazios"
+set yrange [0:2000]
+plot "EomLee.txt" using 1:3 title "EomLee" smooth unique with linespoints, "LowerBound.txt" using 1:3 title "LowerBound" smooth unique with linespoints, "P3.txt" using 1:3 title "P3" smooth unique with linespoints, "P2.txt" using 1:3 title "P2" smooth unique with linespoints, "P1.txt" using 1:3 title "P1" smooth unique with linespoints
+
+#Colisoes
+set terminal wxt 3
+set ylabel "Colisoes"
+set title "Total de Colisões"
+set yrange [*:*]
+plot "EomLee.txt" using 1:4 title "EomLee" smooth unique with linespoints, "LowerBound.txt" using 1:4 title "LowerBound" smooth unique with linespoints, "P3.txt" using 1:4 title "P3" smooth unique with linespoints, "P2.txt" using 1:4 title "P2" smooth unique with linespoints, "P1.txt" using 1:4 title "P1" smooth unique with linespoints
+
+#Eficiencia
+set terminal wxt 4
+set ylabel "Eficiência"
+set title "Eficiência"
+set yrange [*:*]
+plot "EomLee.txt" using ($1):($1/$2) title "EomLee" smooth unique with linespoints, "LowerBound.txt" using ($1):($1/$2) title "LowerBound" smooth unique with linespoint, "P3.txt" using ($1):($1/$2) title "P3" smooth unique with linespoints, "P2.txt" using ($1):($1/$2) title "P2" smooth unique with linespoints, "P1.txt" using ($1):($1/$2) title "P1" smooth unique with linespoints
+
+#Colisões = 0 -> total
+set terminal wxt 5
+set multiplot layout 2,1 rowsfirst
+set ylabel "Vezes"
+set title "(Total)"
+plot "zeroP1.txt" title "P1" smooth cumulative with linespoints
+
+#Colisões = 0 -> média
+set ylabel "Vezes"
+set title "(Média)"
+set yrange [0:1]
+plot "zeroP1.txt" title "P1" smooth unique with linespoints
+
+unset multiplot
+pause(-1)
